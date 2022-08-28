@@ -3,6 +3,10 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 
+// loader
+const textureLoader = new THREE.TextureLoader();
+const normalTexture = textureLoader.load('/textures/NormalMap.png')
+
 // Debug
 const gui = new dat.GUI()
 
@@ -20,6 +24,7 @@ const geometry = new THREE.SphereBufferGeometry(0.5, 64, 64);
 const material = new THREE.MeshStandardMaterial()
 material.metalness = 0.7
 material.roughness = 0.2
+material.normalMap = normalTexture
 material.color = new THREE.Color(0x292929)
 
 // Mesh
