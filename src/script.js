@@ -39,10 +39,49 @@ pointLight.position.y = 3
 pointLight.position.z = 4
 scene.add(pointLight)
 
+// --- light red
 const pointLightRed = new THREE.PointLight(0xff0000, 1)
-pointLightRed.position.set(1, 1, 1)
-pointLightRed.intensity = 1
+pointLightRed.position.set(-1.8, 1, -1.6)
+pointLightRed.intensity = 10
 scene.add(pointLightRed)
+
+const guiLightRed = gui.addFolder("light-red");
+
+guiLightRed.add(pointLightRed.position , "x").min(-3).max(3).step(0.01);
+guiLightRed.add(pointLightRed.position , "y").min(-6).max(6).step(0.01);
+guiLightRed.add(pointLightRed.position , "z").min(-3).max(3).step(0.01);
+guiLightRed.add(pointLightRed , "intensity").min(0).max(10).step(0.01);
+
+// const pointLightRedHelper = new THREE.PointLightHelper(pointLightRed, 1);
+// scene.add(pointLightRedHelper)
+
+
+// --- light blue
+const pointLightBlue = new THREE.PointLight(0xe1ff, 1)
+pointLightBlue.position.set(2.13, -3, -1.98)
+pointLightBlue.intensity = 6.8
+scene.add(pointLightBlue)
+
+const guiLightBlue = gui.addFolder("light-blue");
+
+guiLightBlue.add(pointLightBlue.position , "x").min(-3).max(3).step(0.01);
+guiLightBlue.add(pointLightBlue.position , "y").min(-6).max(6).step(0.01);
+guiLightBlue.add(pointLightBlue.position , "z").min(-3).max(3).step(0.01);
+guiLightBlue.add(pointLightBlue , "intensity").min(0).max(10).step(0.01);
+
+const guiLightBlueColor = {
+    color: 0xff0000
+}
+
+guiLightBlue.addColor(guiLightBlueColor, "color")
+    .onChange(()=>{
+        pointLightBlue.color.set(guiLightBlueColor.color)
+    })
+
+// const pointLightBlueHelper = new THREE.PointLightHelper(pointLightBlue, 1);
+// scene.add(pointLightBlueHelper)
+
+
 
 /**
  * Sizes
