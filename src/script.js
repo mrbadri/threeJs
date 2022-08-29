@@ -145,6 +145,12 @@ function onDocumentMountMove(event) {
   mouseY = event.clientY - windowY;
 }
 
+window.addEventListener('scroll', updateSphere);
+
+function updateSphere() {
+  sphere.position.y = window.scrollY * 0.001;
+}
+
 const clock = new THREE.Clock();
 
 const tick = () => {
@@ -158,6 +164,8 @@ const tick = () => {
 
   sphere.rotation.y = 0.5 * (targetX - sphere.rotation.y);
   sphere.rotation.x = 0.5 * (targetY - sphere.rotation.x);
+
+  sphere.position.z = -0.5 * (targetY - sphere.rotation.x);
 
   pointLightBlue.position.set(2.13 + targetY, -3 + targetX, -1.98 - (targetX + targetY));
   pointLightRed.position.set(-1.8, 1, -1.6 + targetX + targetY);
