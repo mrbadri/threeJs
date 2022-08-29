@@ -129,13 +129,38 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  * Animate
  */
 
+document.addEventListener('mousemove', onDocumentMountMove);
+
+let mouseX = 0;
+let mouseY = 0;
+
+let targetX = 0;
+let targetY = 0;
+
+const windowX = window.innerWidth / 2;
+const windowY = window.innerHeight / 2;
+
+function onDocumentMountMove(event) {
+  mouseX = event.clientX - windowX;
+  mouseY = event.clientY - windowY;
+}
+
 const clock = new THREE.Clock();
 
 const tick = () => {
+  targetX = mouseX * 0.002;
+  targetY = mouseY * 0.002;
+
   const elapsedTime = clock.getElapsedTime();
 
   // Update objects
   sphere.rotation.y = 0.5 * elapsedTime;
+
+  sphere.rotation.y = 0.5 * (targetX - sphere.rotation.y);
+  sphere.rotation.x = 0.5 * (targetY - sphere.rotation.x);
+
+  pointLightBlue.position.set(2.13 + targetY, -3 + targetX, -1.98 - (targetX + targetY));
+  pointLightRed.position.set(-1.8, 1, -1.6 + targetX + targetY);
 
   // Update Orbital Controls
   // controls.update()
